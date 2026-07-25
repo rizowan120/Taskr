@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base Application Theme -->
+    <!-- Base Application Theme -->
+    <style name="Theme.Taskr" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+        
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+        
+        <!-- Tertiary Colors -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+        
+        <!-- Background & Surface -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        
+        <!-- Error Colors -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        
+        <!-- Outline -->
+        <item name="colorOutline">@color/outline</item>
+        
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        
+        <!-- Navigation Bar -->
+        <item name="android:navigationBarColor">@color/nav_background</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        
+        <!-- Shape -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Taskr.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Taskr.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Taskr.LargeComponent</item>
+    </style>
+
+    <!-- Shape Appearances - Going for Extra Rounded/Soft Look -->
+    <style name="ShapeAppearance.Taskr.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Taskr.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Taskr.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+
+    <!-- Button Styles -->
+    <style name="Widget.Taskr.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">24dp</item> <!-- Pill shape -->
+    </style>
+
+    <style name="Widget.Taskr.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">24dp</item>
+        <item name="strokeColor">@color/outline</item>
+    </style>
+
+    <style name="Widget.Taskr.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="cornerRadius">24dp</item>
+    </style>
+
+    <!-- Card Styles -->
+    <style name="Widget.Taskr.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+
+    <!-- Modern M3 Filled Card - Soft colored background -->
+    <style name="Widget.Taskr.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">24dp</item>
+        <item name="contentPadding">16dp</item>
+        <item name="cardBackgroundColor">@color/surface_variant</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <!-- Text Styles - Modern Typography -->
+    <style name="TextAppearance.Taskr.Headline" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Taskr.Title" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Taskr.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.Taskr.Label" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <!-- Chip Styles for Filters -->
+    <style name="Widget.Taskr.Chip.Filter" parent="Widget.Material3.Chip.Filter">
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipBackgroundColor">@color/surface_variant</item>
+        <item name="checkedIconVisible">true</item>
+    </style>
+
+    <!-- TextInputLayout Style - Soft rounded outlines -->
+    <style name="Widget.Taskr.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxStrokeColor">@color/selector_input_stroke</item>
+    </style>
+
+    <!-- FAB Style - Squircle -->
+    <style name="Widget.Taskr.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="shapeAppearance">@style/ShapeAppearance.Taskr.FAB</item>
+    </style>
+
+    <style name="ShapeAppearance.Taskr.FAB" parent="ShapeAppearance.Material3.Corner.Full">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item> <!-- Soft squircle -->
+    </style>
+
+    <!-- Bottom Navigation Style -->
+    <style name="Widget.Taskr.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemIconTint">@color/nav_selected</item>
+        <item name="itemTextColor">@color/nav_selected</item>
+        <item name="elevation">8dp</item>
+        <item name="android:background">@color/nav_background</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Material3.BottomNavigationView.ActiveIndicator</item>
+    </style>
+</resources>

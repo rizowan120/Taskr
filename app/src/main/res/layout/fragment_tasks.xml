@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.tasks.TasksFragment">
+
+    <!-- Header Section -->
+    <LinearLayout
+        android:id="@+id/headerSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Greeting Text -->
+        <TextView
+            android:id="@+id/tvGreeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Taskr.Headline"
+            android:textSize="@dimen/text_headline_medium"
+            android:textColor="@color/text_primary"
+            tools:text="Good morning, John" />
+
+        <!-- Progress Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_md">
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Taskr.Body"
+                android:textColor="@color/text_secondary"
+                tools:text="3 of 8 tasks completed" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:max="100"
+                android:progress="37"
+                android:progressDrawable="@drawable/progress_drawable"
+                tools:progress="37" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Filter Chips -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintTop_toBottomOf="@id/headerSection">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAll"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_all"
+            android:checked="true" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipToday"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_today" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipUpcoming"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_upcoming" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <!-- Tasks RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTasks"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:padding="@dimen/spacing_md"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chipGroupFilters"
+        tools:listitem="@layout/item_task" />
+
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chipGroupFilters"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:alpha="0.3"
+            android:src="@drawable/ic_tasks"
+            android:contentDescription="@null"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+            android:id="@+id/tvEmptyMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:text="@string/no_tasks"
+            android:textAppearance="@style/TextAppearance.Taskr.Body"
+            android:textColor="@color/text_secondary" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

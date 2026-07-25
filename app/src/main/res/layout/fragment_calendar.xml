@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.calendar.CalendarFragment">
+
+    <!-- Calendar View -->
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/calendarView" />
+
+    <!-- Selected Date Label -->
+    <TextView
+        android:id="@+id/tvSelectedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_md"
+        android:textAppearance="@style/TextAppearance.Taskr.Title"
+        android:textColor="@color/text_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        tools:text="Today, Feb 5" />
+
+    <!-- Tasks for Selected Date -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTasks"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:padding="@dimen/spacing_md"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectedDate"
+        tools:listitem="@layout/item_task" />
+
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectedDate"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:alpha="0.3"
+            android:src="@drawable/ic_calendar"
+            android:contentDescription="@null"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="@string/no_tasks_for_date"
+            android:textAppearance="@style/TextAppearance.Taskr.Body"
+            android:textColor="@color/text_secondary" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

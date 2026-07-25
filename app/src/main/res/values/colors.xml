@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Coral Sunset Theme Palette -->
+    
+    <!-- Primary - Vibrant Coral -->
+    <color name="primary">#FF6B6B</color>
+    <color name="primary_variant">#FF5252</color>
+    <color name="on_primary">#FFFFFF</color>
+    
+    <!-- Secondary - Sunset Orange/Peach -->
+    <color name="secondary">#FFB74D</color>
+    <color name="secondary_variant">#FFA726</color>
+    <color name="on_secondary">#2D2D2D</color>
+    
+    <!-- Tertiary - Soft Pink -->
+    <color name="tertiary">#F06292</color>
+    <color name="on_tertiary">#FFFFFF</color>
+    
+    <!-- Backgrounds - Warm White -->
+    <color name="background">#FFFDF9</color>
+    <color name="on_background">#2D2D2D</color>
+    
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#2D2D2D</color>
+    <color name="surface_variant">#F5F0EB</color>
+    <color name="on_surface_variant">#5C5C5C</color>
+    
+    <!-- Containers -->
+    <color name="primary_container">#FFEBEE</color>
+    <color name="on_primary_container">#C62828</color>
+    <color name="secondary_container">#FFF3E0</color>
+    <color name="on_secondary_container">#E65100</color>
+    <color name="tertiary_container">#FCE4EC</color>
+    <color name="on_tertiary_container">#880E4F</color>
+    
+    <!-- Priority Colors -->
+    <color name="priority_low">#81C784</color>
+    <color name="priority_medium">#FFB74D</color>
+    <color name="priority_high">#E57373</color>
+    
+    <!-- Utility Colors -->
+    <color name="error">#B00020</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="outline">#79747E</color>
+    <color name="divider">#E0E0E0</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#2D2D2D</color>
+    <color name="text_secondary">#5C5C5C</color>
+    <color name="text_hint">#858585</color>
+    <color name="text_disabled">#9E9E9E</color>
+    
+    <!-- State Colors -->
+    <color name="ripple">#20FF6B6B</color>
+    <color name="checked">#FF6B6B</color>
+    <color name="unchecked">#858585</color>
+    
+    <!-- Card/Surface Colors -->
+    <color name="card_background">#FFFFFF</color>
+    <color name="card_stroke">#F0F0F0</color>
+    
+    <!-- Navigation Colors -->
+    <color name="nav_selected">#FF6B6B</color>
+    <color name="nav_unselected">#858585</color>
+    <color name="nav_background">#FFFFFF</color>
+    
+    <!-- FAB Colors -->
+    <color name="fab_background">#FF6B6B</color>
+    <color name="fab_icon">#FFFFFF</color>
+    
+    <!-- Switch Colors -->
+    <color name="switch_track_checked">#FF6B6B</color>
+    <color name="switch_track_unchecked">#E0E0E0</color>
+</resources>

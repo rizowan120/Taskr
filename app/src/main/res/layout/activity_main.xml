@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.MainActivity">
+
+    <!-- NavHostFragment - Main content area -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bottom_nav_height"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+
+    <!-- Bottom App Bar Container -->
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_nav_height"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="8dp"
+        app:fabCradleRoundedCornerRadius="16dp"
+        app:fabCradleVerticalOffset="0dp"
+        app:hideOnScroll="false"
+        app:fabAlignmentMode="center"
+        app:elevation="@dimen/elevation_lg"
+        android:backgroundTint="@color/nav_background">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            app:itemIconTint="@color/bottom_nav_colors"
+            app:itemTextColor="@color/bottom_nav_colors"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navigation_menu"
+            app:elevation="0dp" />
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <!-- Floating Action Button (Center docked) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/cd_add_task"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/fab_icon"
+        app:backgroundTint="@color/fab_background"
+        app:layout_anchor="@id/bottomAppBar"
+        app:layout_anchorGravity="top|center_horizontal"
+        app:fabSize="normal"
+        app:shapeAppearance="@style/ShapeAppearance.Taskr.FAB" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

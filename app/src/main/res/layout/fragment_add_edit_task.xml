@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    tools:context=".ui.addedittask.AddEditTaskFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top App Bar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/background"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationContentDescription="@string/cd_back"
+            app:title="@string/add_task"
+            app:titleTextColor="@color/text_primary">
+
+            <ImageButton
+                android:id="@+id/btnSave"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/spacing_sm"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_save"
+                android:src="@drawable/ic_check"
+                android:enabled="false"
+                android:alpha="0.5"
+                app:tint="@color/primary" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <!-- Form Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/spacing_md"
+            android:paddingTop="@dimen/spacing_md"
+            android:paddingEnd="@dimen/spacing_md"
+            android:paddingBottom="100dp">
+
+            <!-- Task Title -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTitle"
+                style="@style/Widget.Taskr.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/task_title"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapSentences"
+                    android:maxLines="2" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Description -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDescription"
+                style="@style/Widget.Taskr.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:hint="@string/task_description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minLines="2"
+                    android:maxLines="4" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Priority Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:text="@string/priority"
+                android:textAppearance="@style/TextAppearance.Taskr.Label"
+                android:textColor="@color/text_secondary" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/togglePriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                app:singleSelection="true"
+                app:selectionRequired="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPriorityLow"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/priority_low" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPriorityMedium"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/priority_medium" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPriorityHigh"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/priority_high" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <!-- Due Date -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/due_date"
+                        android:textAppearance="@style/TextAppearance.Taskr.Label"
+                        android:textColor="@color/text_secondary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDueDate"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:text="@string/set_date"
+                        app:icon="@drawable/ic_event"
+                        app:iconGravity="start" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/due_time"
+                        android:textAppearance="@style/TextAppearance.Taskr.Label"
+                        android:textColor="@color/text_secondary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDueTime"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_sm"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:text="@string/set_time"
+                        app:icon="@drawable/ic_time"
+                        app:iconGravity="start" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Reminder Toggle -->
+            <LinearLayout
+                android:id="@+id/layoutReminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_md"
+                    android:layout_height="@dimen/icon_md"
+                    android:src="@drawable/ic_notification"
+                    android:contentDescription="@null"
+                    app:tint="@color/text_secondary" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_md"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reminder"
+                        android:textAppearance="@style/TextAppearance.Taskr.Title"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reminder_description"
+                        android:textAppearance="@style/TextAppearance.Taskr.Body"
+                        android:textColor="@color/text_secondary" />
+
+                </LinearLayout>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switchReminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <!-- Repeat Toggle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_md"
+                    android:layout_height="@dimen/icon_md"
+                    android:src="@drawable/ic_repeat"
+                    android:contentDescription="@null"
+                    app:tint="@color/text_secondary" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_md"
+                    android:layout_weight="1"
+                    android:text="@string/repeat"
+                    android:textAppearance="@style/TextAppearance.Taskr.Title"
+                    android:textColor="@color/text_primary" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switchRepeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <!-- Repeat Options (visible when repeat is enabled) -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupRepeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:layout_marginStart="40dp"
+                android:visibility="gone"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                tools:visibility="visible">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDaily"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/repeat_daily"
+                    android:checked="true" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipWeekly"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/repeat_weekly" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMonthly"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/repeat_monthly" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- Subtasks Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_md"
+                        android:layout_height="@dimen/icon_md"
+                        android:src="@drawable/ic_subtasks"
+                        android:contentDescription="@null"
+                        app:tint="@color/text_secondary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:layout_weight="1"
+                        android:text="@string/subtasks"
+                        android:textAppearance="@style/TextAppearance.Taskr.Title"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
+
+                <!-- Subtasks List -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSubtasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:layout_marginStart="40dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_subtask_edit" />
+
+                <!-- Add Subtask Input -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:layout_marginStart="40dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Taskr.TextInputLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/add_subtask">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etNewSubtask"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapSentences"
+                            android:imeOptions="actionDone"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnAddSubtask"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="@dimen/spacing_sm"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/add_subtask"
+                        android:src="@drawable/ic_add"
+                        app:tint="@color/primary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Delete Button (only shown when editing) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDelete"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:text="@string/delete"
+                android:textColor="@color/error"
+                android:visibility="gone"
+                app:icon="@drawable/ic_delete"
+                app:iconGravity="textStart"
+                app:iconTint="@color/error"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

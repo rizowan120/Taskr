@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors - Dark Theme (Coral) -->
+    <color name="primary">#FF8A80</color>
+    <color name="primary_variant">#FF5252</color>
+    <color name="on_primary">#2D2D2D</color>
+    
+    <color name="secondary">#FFCC80</color>
+    <color name="secondary_variant">#FFA726</color>
+    <color name="on_secondary">#2D2D2D</color>
+    
+    <color name="tertiary">#F48FB1</color>
+    <color name="on_tertiary">#2D2D2D</color>
+    
+    <!-- Background Colors -->
+    <color name="background">#121212</color>
+    <color name="on_background">#E0E0E0</color>
+    
+    <color name="surface">#1E1E1E</color>
+    <color name="on_surface">#E0E0E0</color>
+    <color name="surface_variant">#2D2D2D</color>
+    <color name="on_surface_variant">#B0B0B0</color>
+    
+    <!-- Container Colors -->
+    <color name="primary_container">#3E2723</color>
+    <color name="on_primary_container">#FF8A80</color>
+    <color name="secondary_container">#3E2723</color>
+    <color name="on_secondary_container">#FFCC80</color>
+    <color name="tertiary_container">#3E2723</color>
+    <color name="on_tertiary_container">#F48FB1</color>
+    
+    <!-- Priority Colors -->
+    <color name="priority_low">#81C784</color>
+    <color name="priority_medium">#FFB74D</color>
+    <color name="priority_high">#E57373</color>
+    
+    <!-- Utility Colors -->
+    <color name="error">#CF6679</color>
+    <color name="on_error">#000000</color>
+    <color name="outline">#858585</color>
+    <color name="divider">#2D2D2D</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#E0E0E0</color>
+    <color name="text_secondary">#B0B0B0</color>
+    <color name="text_hint">#858585</color>
+    <color name="text_disabled">#5C5C5C</color>
+    
+    <!-- State Colors -->
+    <color name="ripple">#20FF8A80</color>
+    <color name="checked">#FF8A80</color>
+    <color name="unchecked">#858585</color>
+    
+    <!-- Card/Surface Colors -->
+    <color name="card_background">#242424</color>
+    <color name="card_stroke">#2D2D2D</color>
+    
+    <!-- Navigation Colors -->
+    <color name="nav_selected">#FF8A80</color>
+    <color name="nav_unselected">#858585</color>
+    <color name="nav_background">#1E1E1E</color>
+    
+    <!-- FAB Colors -->
+    <color name="fab_background">#FF8A80</color>
+    <color name="fab_icon">#2D2D2D</color>
+</resources>

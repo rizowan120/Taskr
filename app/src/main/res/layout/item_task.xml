@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardTask"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_sm"
+    android:clickable="true"
+    android:focusable="true"
+    style="@style/Widget.Material3.CardView.Filled"
+    app:cardBackgroundColor="@color/card_background"
+    app:cardCornerRadius="@dimen/corner_radius_lg"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Priority Side Bar -->
+        <View
+            android:id="@+id/priorityIndicator"
+            android:layout_width="6dp"
+            android:layout_height="0dp"
+            android:background="@drawable/priority_indicator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_md"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/priorityIndicator"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Checkbox -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/checkboxTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:layout_marginEnd="@dimen/spacing_sm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:buttonTint="@color/primary" />
+
+            <!-- Task Title -->
+            <TextView
+                android:id="@+id/tvTaskTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:layout_marginEnd="@dimen/spacing_sm"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/TextAppearance.Taskr.Title"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/checkboxTask"
+                app:layout_constraintTop_toTopOf="@id/checkboxTask"
+                app:layout_constraintBottom_toBottomOf="@id/checkboxTask"
+                tools:text="Complete project documentation" />
+
+            <!-- Due Date/Time Info -->
+            <LinearLayout
+                android:id="@+id/layoutDueInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvTaskTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvTaskTitle">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_event"
+                    android:contentDescription="@null"
+                    app:tint="@color/text_hint" />
+
+                <TextView
+                    android:id="@+id/tvDueDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_xs"
+                    android:textAppearance="@style/TextAppearance.Taskr.Label"
+                    android:textColor="@color/text_hint"
+                    tools:text="Today, 3:00 PM" />
+
+                <!-- Repeat Icon -->
+                <ImageView
+                    android:id="@+id/ivRepeat"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="@dimen/spacing_md"
+                    android:src="@drawable/ic_repeat"
+                    android:visibility="gone"
+                    android:contentDescription="@null"
+                    app:tint="@color/text_hint"
+                    tools:visibility="visible" />
+
+                <!-- Subtasks Icon -->
+                <LinearLayout
+                    android:id="@+id/layoutSubtasks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_md"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+                    
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_subtasks"
+                        app:tint="@color/text_hint"
+                        android:contentDescription="@null"/>
+
+                    <TextView
+                        android:id="@+id/tvSubtasksCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textAppearance="@style/TextAppearance.Taskr.Label"
+                        android:textColor="@color/text_hint"
+                        tools:text="2/4" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
