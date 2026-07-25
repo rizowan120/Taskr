@@ -28,9 +28,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file(System.getenv("KEYSTORE_PATH")?.takeIf { it.isNotBlank() } ?: "release.keystore")
-            storePassword = System.getenv("KEYSTORE_PASSWORD")?.takeIf { it.isNotBlank() } ?: "password"
-            keyAlias = System.getenv("KEY_ALIAS")?.takeIf { it.isNotBlank() } ?: "key0"
-            keyPassword = System.getenv("KEY_PASSWORD")?.takeIf { it.isNotBlank() } ?: "password"
+            storePassword = System.getenv("KEYSTORE_PASSWORD")?.replace("\"", "")?.trim()?.takeIf { it.isNotBlank() } ?: "password"
+            keyAlias = System.getenv("KEY_ALIAS")?.replace("\"", "")?.trim()?.takeIf { it.isNotBlank() } ?: "key0"
+            keyPassword = System.getenv("KEY_PASSWORD")?.replace("\"", "")?.trim()?.takeIf { it.isNotBlank() } ?: "password"
         }
     }
 
