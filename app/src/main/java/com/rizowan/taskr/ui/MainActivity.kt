@@ -1,7 +1,10 @@
 package com.rizowan.taskr.ui
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -38,11 +41,14 @@ class MainActivity : AppCompatActivity() {
 
     private var hapticsEnabled = true
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        // Handled silently
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
-        // Apply theme before setContentView
-        applyTheme()
         
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -52,27 +58,17 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
         setupFab()
         observePreferences()
+        
+        askNotificationPermission()
     }
 
-    /**
-     * Apply theme based on saved preference.
-     * Must be called synchronously before setContentView to avoid flicker.
-     */
-    private fun applyTheme() {
-        // Read theme synchronously - this is acceptable here because:
-        // 1. DataStore reads are fast for cached values
-        // 2. This must complete before setContentView to avoid theme flicker
-        val themeMode = kotlinx.coroutines.runBlocking {
-            kotlinx.coroutines.withTimeoutOrNull(1000L) {
-                preferencesManager.themeMode.first()
-            } ?: ThemeMode.SYSTEM
-        }
-        when (themeMode) {
-            ThemeMode.LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            ThemeMode.DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            ThemeMode.SYSTEM -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+    private fun askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
+
+
 
     /**
      * Setup window insets for edge-to-edge display.

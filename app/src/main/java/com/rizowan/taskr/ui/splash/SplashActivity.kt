@@ -11,11 +11,19 @@ import com.rizowan.taskr.ui.MainActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import androidx.appcompat.app.AppCompatDelegate
+import com.rizowan.taskr.data.preferences.PreferencesManager
+import com.rizowan.taskr.data.preferences.ThemeMode
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
+import javax.inject.Inject
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var preferencesManager: PreferencesManager
 
     private lateinit var binding: ActivitySplashBinding
 
@@ -72,8 +80,17 @@ class SplashActivity : AppCompatActivity() {
                 .start()
         }
 
-        // Navigate to Main Activity after delay
+        // Navigate to Main Activity after delay and applying theme
         lifecycleScope.launch {
+            // Read theme asynchronously
+            val themeMode = preferencesManager.themeMode.first()
+            val nightMode = when (themeMode) {
+                ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+                ThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
+                ThemeMode.SYSTEM -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            }
+            AppCompatDelegate.setDefaultNightMode(nightMode)
+
             delay(4000) // 4 seconds delay as requested
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             // Apply smooth fade transition
