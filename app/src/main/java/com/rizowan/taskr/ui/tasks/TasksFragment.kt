@@ -56,8 +56,19 @@ class TasksFragment : Fragment() {
         
         setupRecyclerView()
         setupFilterChips()
+        setupSearch()
         observeUiState()
         observeHaptics()
+    }
+
+    private fun setupSearch() {
+        binding.etSearch.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                viewModel.setSearchQuery(s?.toString() ?: "")
+            }
+        })
     }
 
     /**
@@ -90,6 +101,31 @@ class TasksFragment : Fragment() {
             // Apply subtle layout animation
             layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
         }
+
+        // Setup Swipe to Delete
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val taskList = taskAdapter.currentList
+                if (position in taskList.indices) {
+                    val taskToDelete = taskList[position]
+                    viewModel.deleteTask(taskToDelete)
+                    
+                    Snackbar.make(binding.root, "Task deleted", Snackbar.LENGTH_LONG)
+                        .setAction("Undo") {
+                            viewModel.undoDeleteTask(taskToDelete)
+                        }
+                        .show()
+                }
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(binding.rvTasks)
     }
 
     /**

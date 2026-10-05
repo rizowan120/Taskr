@@ -24,6 +24,8 @@ data class Task(
     val isRepeating: Boolean = false,
     val repeatType: RepeatType? = null,
     val hasReminder: Boolean = false,
+    val categoryId: Long? = null,
+    val sortOrder: Int = 0,
     val createdAt: Long = System.currentTimeMillis()
 ) : Parcelable
 

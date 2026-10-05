@@ -93,14 +93,17 @@ class TaskAdapter(
                 val timeStr = task.dueTime?.let { DateUtils.formatTime(it) }
                 binding.tvDueDate.text = if (timeStr != null) "$dateStr, $timeStr" else dateStr
 
-                // Show overdue color
+                // Show overdue color and badge
                 if (DateUtils.isOverdue(task.dueDate) && !task.isCompleted) {
                     binding.tvDueDate.setTextColor(ContextCompat.getColor(context, R.color.error))
+                    binding.tvOverdueBadge.visibility = View.VISIBLE
                 } else {
                     binding.tvDueDate.setTextColor(ContextCompat.getColor(context, R.color.text_hint))
+                    binding.tvOverdueBadge.visibility = View.GONE
                 }
             } else {
                 binding.layoutDueInfo.visibility = View.GONE
+                binding.tvOverdueBadge.visibility = View.GONE
             }
 
             // Repeat icon

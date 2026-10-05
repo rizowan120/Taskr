@@ -35,6 +35,7 @@ data class TasksUiState(
     val completedCount: Int = 0,
     val totalCount: Int = 0,
     val filter: TaskFilter = TaskFilter.ALL,
+    val searchQuery: String = "",
     val userName: String = "",
     val greeting: String = "",
     val isLoading: Boolean = false
@@ -53,6 +54,9 @@ class TasksViewModel @Inject constructor(
     private val _currentFilter = MutableStateFlow(TaskFilter.ALL)
     val currentFilter: StateFlow<TaskFilter> = _currentFilter.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
     // Combine flows for UI state
     val uiState: StateFlow<TasksUiState> = combine(
         taskRepository.getAllActiveTasks(),
@@ -61,7 +65,8 @@ class TasksViewModel @Inject constructor(
         taskRepository.getCompletedTaskCount(),
         taskRepository.getTotalTaskCount(),
         preferencesManager.userName,
-        _currentFilter
+        _currentFilter,
+        _searchQuery
     ) { values ->
         @Suppress("UNCHECKED_CAST")
         val allTasks = values[0] as List<TaskWithSubTasks>
@@ -73,11 +78,21 @@ class TasksViewModel @Inject constructor(
         val totalCount = values[4] as Int
         val userName = values[5] as String
         val filter = values[6] as TaskFilter
+        val searchQ = values[7] as String
 
-        val tasks = when (filter) {
+        var tasks = when (filter) {
             TaskFilter.ALL -> allTasks
             TaskFilter.TODAY -> todayTasks
             TaskFilter.UPCOMING -> upcomingTasks
+        }
+
+        // Apply search filter
+        if (searchQ.isNotBlank()) {
+            tasks = tasks.filter {
+                it.task.title.contains(searchQ, ignoreCase = true) ||
+                (it.task.description?.contains(searchQ, ignoreCase = true) ?: false) ||
+                it.subTasks.any { sub -> sub.title.contains(searchQ, ignoreCase = true) }
+            }
         }
 
         val greeting = buildGreeting(userName)
@@ -87,6 +102,7 @@ class TasksViewModel @Inject constructor(
             completedCount = completedCount,
             totalCount = totalCount,
             filter = filter,
+            searchQuery = searchQ,
             userName = userName,
             greeting = greeting
         )
@@ -101,6 +117,13 @@ class TasksViewModel @Inject constructor(
      */
     fun setFilter(filter: TaskFilter) {
         _currentFilter.value = filter
+    }
+
+    /**
+     * Set the search query.
+     */
+    fun setSearchQuery(query: String) {
+        _searchQuery.value = query
     }
 
     /**
@@ -132,6 +155,28 @@ class TasksViewModel @Inject constructor(
     fun restoreTask(taskId: Long) {
         viewModelScope.launch {
             taskRepository.restoreTask(taskId)
+        }
+    }
+
+    /**
+     * Delete a task (with subtasks) and return it so it can be undone.
+     */
+    fun deleteTask(taskWithSubTasks: TaskWithSubTasks) {
+        viewModelScope.launch {
+            notificationScheduler.cancelNotification(taskWithSubTasks.task.id)
+            taskRepository.deleteTask(taskWithSubTasks.task)
+        }
+    }
+
+    /**
+     * Undo a deleted task by re-inserting it.
+     */
+    fun undoDeleteTask(taskWithSubTasks: TaskWithSubTasks) {
+        viewModelScope.launch {
+            taskRepository.insertTask(taskWithSubTasks.task, taskWithSubTasks.subTasks)
+            if (taskWithSubTasks.task.hasReminder && taskWithSubTasks.task.dueDate != null && taskWithSubTasks.task.dueTime != null) {
+                notificationScheduler.scheduleNotification(taskWithSubTasks.task)
+            }
         }
     }
 

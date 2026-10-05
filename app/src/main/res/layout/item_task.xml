@@ -94,6 +94,21 @@
                     android:textAppearance="@style/TextAppearance.Taskr.Label"
                     android:textColor="@color/text_hint"
                     tools:text="Today, 3:00 PM" />
+                    
+                <TextView
+                    android:id="@+id/tvOverdueBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_xs"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="2dp"
+                    android:background="@drawable/bg_overdue_badge"
+                    android:text="Overdue"
+                    android:visibility="gone"
+                    android:textAppearance="@style/TextAppearance.Taskr.Label"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    tools:visibility="visible" />
 
                 <!-- Repeat Icon -->
                 <ImageView

@@ -3,6 +3,7 @@ package com.rizowan.taskr.di
 import android.content.Context
 import androidx.room.Room
 import com.rizowan.taskr.data.local.TaskrDatabase
+import com.rizowan.taskr.data.local.dao.CategoryDao
 import com.rizowan.taskr.data.local.dao.SubTaskDao
 import com.rizowan.taskr.data.local.dao.TaskDao
 import dagger.Module
@@ -29,12 +30,8 @@ object DatabaseModule {
             TaskrDatabase::class.java,
             "taskr_database"
         )
-            // TODO: Add proper migrations before production release
-            // Example: .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-            // fallbackToDestructiveMigration is kept for development convenience only
-            // WARNING: This will DELETE all user data on schema changes!
-            .fallbackToDestructiveMigration()
-            .build()
+        .addMigrations(TaskrDatabase.MIGRATION_1_2)
+        .build()
     }
 
     @Provides
@@ -47,5 +44,11 @@ object DatabaseModule {
     @Singleton
     fun provideSubTaskDao(database: TaskrDatabase): SubTaskDao {
         return database.subTaskDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryDao(database: TaskrDatabase): CategoryDao {
+        return database.categoryDao()
     }
 }

@@ -77,6 +77,15 @@ interface TaskDao {
     """)
     fun getTasksDueToday(startOfDay: Long, endOfDay: Long): Flow<List<TaskWithSubTasks>>
 
+    @Query("""
+        SELECT * FROM tasks 
+        WHERE isCompleted = 0 
+        AND dueDate >= :startOfDay 
+        AND dueDate < :endOfDay
+        ORDER BY dueTime ASC, priority DESC
+    """)
+    suspend fun getTasksDueTodaySync(startOfDay: Long, endOfDay: Long): List<Task>
+
     /**
      * Get upcoming tasks (due after today, active only).
      */

@@ -91,7 +91,7 @@ class SplashActivity : AppCompatActivity() {
             }
             AppCompatDelegate.setDefaultNightMode(nightMode)
 
-            delay(4000) // 4 seconds delay as requested
+            delay(1000) // 1 second delay
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             // Apply smooth fade transition
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

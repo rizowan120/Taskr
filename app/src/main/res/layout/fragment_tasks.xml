@@ -56,6 +56,29 @@
 
     </LinearLayout>
 
+    <!-- Search Bar -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_sm"
+        app:startIconDrawable="@drawable/ic_tasks"
+        app:startIconTint="@color/text_secondary"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toBottomOf="@id/headerSection"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search tasks..."
+            android:inputType="text"
+            android:maxLines="1"
+            android:imeOptions="actionSearch" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- Filter Chips -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupFilters"
@@ -63,9 +86,10 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/spacing_md"
         android:paddingEnd="@dimen/spacing_md"
+        android:paddingTop="@dimen/spacing_sm"
         app:singleSelection="true"
         app:selectionRequired="true"
-        app:layout_constraintTop_toBottomOf="@id/headerSection">
+        app:layout_constraintTop_toBottomOf="@id/tilSearch">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipAll"

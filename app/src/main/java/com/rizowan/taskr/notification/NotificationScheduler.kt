@@ -45,8 +45,8 @@ class NotificationScheduler @Inject constructor(
             putExtra(AlarmReceiver.EXTRA_TASK_TITLE, task.title)
         }
 
-        // Use hashCode() to safely convert Long to Int without overflow risk
-        val requestCode = task.id.hashCode()
+        // Use toInt() to safely convert Long to Int and match AlarmReceiver
+        val requestCode = task.id.toInt()
         val pendingIntent = PendingIntent.getBroadcast(
             context,
             requestCode,
@@ -93,8 +93,8 @@ class NotificationScheduler @Inject constructor(
      */
     fun cancelNotification(taskId: Long) {
         val intent = Intent(context, AlarmReceiver::class.java)
-        // Use hashCode() for consistency with scheduleNotification
-        val requestCode = taskId.hashCode()
+        // Use toInt() for consistency with scheduleNotification
+        val requestCode = taskId.toInt()
         val pendingIntent = PendingIntent.getBroadcast(
             context,
             requestCode,
