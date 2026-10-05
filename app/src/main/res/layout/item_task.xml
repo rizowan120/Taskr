@@ -9,7 +9,7 @@
     android:clickable="true"
     android:focusable="true"
     style="@style/Widget.Material3.CardView.Filled"
-    app:cardBackgroundColor="@color/card_background"
+    app:cardBackgroundColor="?attr/colorSurfaceVariant"
     app:cardCornerRadius="@dimen/corner_radius_lg"
     app:cardElevation="0dp"
     app:strokeWidth="0dp">

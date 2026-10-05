@@ -181,6 +181,17 @@ class TasksViewModel @Inject constructor(
     }
 
     /**
+     * Update task sort order after drag and drop.
+     */
+    fun updateTaskSortOrder(tasksToUpdate: List<Task>) {
+        viewModelScope.launch {
+            tasksToUpdate.forEach { task ->
+                taskRepository.updateTask(task)
+            }
+        }
+    }
+
+    /**
      * Build greeting string based on time and user name.
      */
     private fun buildGreeting(userName: String): String {

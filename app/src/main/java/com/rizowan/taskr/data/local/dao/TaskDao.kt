@@ -54,7 +54,7 @@ interface TaskDao {
      * Get all active (not completed) tasks as a Flow.
      */
     @Transaction
-    @Query("SELECT * FROM tasks WHERE isCompleted = 0 ORDER BY dueDate ASC, priority DESC, createdAt DESC")
+    @Query("SELECT * FROM tasks WHERE isCompleted = 0 ORDER BY sortOrder ASC, dueDate ASC, priority DESC, createdAt DESC")
     fun getAllActiveTasks(): Flow<List<TaskWithSubTasks>>
 
     /**

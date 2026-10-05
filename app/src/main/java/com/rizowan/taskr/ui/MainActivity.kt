@@ -48,6 +48,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Read theme before super.onCreate to avoid recreation
+        kotlinx.coroutines.runBlocking {
+            val themeMode = preferencesManager.themeMode.first()
+            if (themeMode == ThemeMode.AMOLED) {
+                setTheme(R.style.Theme_Taskr_Amoled)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                val nightMode = when (themeMode) {
+                    ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+                    ThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
+                    else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                }
+                AppCompatDelegate.setDefaultNightMode(nightMode)
+            }
+        }
         super.onCreate(savedInstanceState)
         
         binding = ActivityMainBinding.inflate(layoutInflater)

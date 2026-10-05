@@ -84,12 +84,16 @@ class SplashActivity : AppCompatActivity() {
         lifecycleScope.launch {
             // Read theme asynchronously
             val themeMode = preferencesManager.themeMode.first()
-            val nightMode = when (themeMode) {
-                ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
-                ThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
-                ThemeMode.SYSTEM -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            if (themeMode == ThemeMode.AMOLED) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                val nightMode = when (themeMode) {
+                    ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+                    ThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
+                    else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                }
+                AppCompatDelegate.setDefaultNightMode(nightMode)
             }
-            AppCompatDelegate.setDefaultNightMode(nightMode)
 
             delay(1000) // 1 second delay
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))

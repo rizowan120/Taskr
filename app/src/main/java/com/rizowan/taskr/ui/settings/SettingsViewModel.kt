@@ -19,7 +19,8 @@ import com.rizowan.taskr.data.preferences.ThemeMode
 enum class ThemeOption(val displayName: String) {
     SYSTEM("System default"),
     LIGHT("Light"),
-    DARK("Dark")
+    DARK("Dark"),
+    AMOLED("AMOLED Black")
 }
 
 /**
@@ -51,6 +52,7 @@ class SettingsViewModel @Inject constructor(
             themeOption = when (themeMode) {
                 ThemeMode.LIGHT -> ThemeOption.LIGHT
                 ThemeMode.DARK -> ThemeOption.DARK
+                ThemeMode.AMOLED -> ThemeOption.AMOLED
                 ThemeMode.SYSTEM -> ThemeOption.SYSTEM
             },
             notificationsEnabled = notifications,
@@ -79,6 +81,7 @@ class SettingsViewModel @Inject constructor(
             val mode = when (option) {
                 ThemeOption.LIGHT -> ThemeMode.LIGHT
                 ThemeOption.DARK -> ThemeMode.DARK
+                ThemeOption.AMOLED -> ThemeMode.AMOLED
                 ThemeOption.SYSTEM -> ThemeMode.SYSTEM
             }
             preferencesManager.setThemeMode(mode)

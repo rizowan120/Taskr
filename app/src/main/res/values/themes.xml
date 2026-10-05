@@ -53,6 +53,15 @@
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Taskr.LargeComponent</item>
     </style>
 
+    <style name="Theme.Taskr.Amoled" parent="Theme.Taskr">
+        <item name="android:colorBackground">#000000</item>
+        <item name="colorSurface">#000000</item>
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="colorSurfaceVariant">#121212</item>
+        <item name="colorPrimaryContainer">#121212</item>
+    </style>
+
     <!-- Shape Appearances - Going for Extra Rounded/Soft Look -->
     <style name="ShapeAppearance.Taskr.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">rounded</item>

@@ -127,10 +127,15 @@ class SettingsFragment : Fragment() {
      * Apply theme immediately.
      */
     private fun applyTheme(option: ThemeOption) {
+        if (option == ThemeOption.AMOLED || viewModel.uiState.value.themeOption == ThemeOption.AMOLED) {
+            // AMOLED requires a full theme recreation
+            requireActivity().recreate()
+            return
+        }
         val nightMode = when (option) {
             ThemeOption.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
             ThemeOption.DARK -> AppCompatDelegate.MODE_NIGHT_YES
-            ThemeOption.SYSTEM -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
         AppCompatDelegate.setDefaultNightMode(nightMode)
     }

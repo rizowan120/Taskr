@@ -30,7 +30,7 @@
         app:hideOnScroll="false"
         app:fabAlignmentMode="center"
         app:elevation="@dimen/elevation_lg"
-        android:backgroundTint="@color/nav_background">
+        android:backgroundTint="?android:attr/navigationBarColor">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"

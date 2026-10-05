@@ -12,6 +12,8 @@ import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Singleton
 
+import com.rizowan.taskr.data.local.dao.CategoryDao
+
 /**
  * Repository for Task and SubTask operations.
  * Acts as a single source of truth for task data.
@@ -19,8 +21,14 @@ import javax.inject.Singleton
 @Singleton
 class TaskRepository @Inject constructor(
     private val taskDao: TaskDao,
-    private val subTaskDao: SubTaskDao
+    private val subTaskDao: SubTaskDao,
+    private val categoryDao: CategoryDao
 ) {
+    // ========== Category Operations ==========
+    fun getAllCategories() = categoryDao.getAllCategories()
+    suspend fun insertCategory(category: com.rizowan.taskr.data.local.entity.Category) = categoryDao.insertCategory(category)
+    suspend fun updateCategory(category: com.rizowan.taskr.data.local.entity.Category) = categoryDao.updateCategory(category)
+    suspend fun deleteCategory(category: com.rizowan.taskr.data.local.entity.Category) = categoryDao.deleteCategory(category)
     // ========== Task Operations ==========
 
     /**

@@ -102,13 +102,42 @@ class TasksFragment : Fragment() {
             layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
         }
 
-        // Setup Swipe to Delete
-        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        // Setup Swipe to Delete and Drag to Reorder
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN, 
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
-            ): Boolean = false
+            ): Boolean {
+                val fromPosition = viewHolder.bindingAdapterPosition
+                val toPosition = target.bindingAdapterPosition
+                
+                val currentList = taskAdapter.currentList.toMutableList()
+                if (fromPosition < toPosition) {
+                    for (i in fromPosition until toPosition) {
+                        java.util.Collections.swap(currentList, i, i + 1)
+                    }
+                } else {
+                    for (i in fromPosition downTo toPosition + 1) {
+                        java.util.Collections.swap(currentList, i, i - 1)
+                    }
+                }
+                
+                taskAdapter.submitList(currentList)
+                return true
+            }
+
+            override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+                super.clearView(recyclerView, viewHolder)
+                // When drag is finished, update database
+                val updatedTasks = taskAdapter.currentList.mapIndexed { index, taskWithSubTasks ->
+                    taskWithSubTasks.task.copy(sortOrder = index)
+                }
+                viewModel.updateTaskSortOrder(updatedTasks)
+            }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
@@ -180,10 +209,14 @@ class TasksFragment : Fragment() {
                     if (state.tasks.isEmpty() && !state.isLoading) {
                         binding.rvTasks.visibility = View.GONE
                         binding.emptyState.visibility = View.VISIBLE
-                        binding.tvEmptyMessage.text = when (state.filter) {
-                            TaskFilter.ALL -> getString(R.string.no_tasks)
-                            TaskFilter.TODAY -> getString(R.string.no_tasks_today)
-                            TaskFilter.UPCOMING -> getString(R.string.no_upcoming_tasks)
+                        if (state.searchQuery.isNotBlank()) {
+                            binding.tvEmptyMessage.text = "No tasks found"
+                        } else {
+                            binding.tvEmptyMessage.text = when (state.filter) {
+                                TaskFilter.ALL -> getString(R.string.no_tasks)
+                                TaskFilter.TODAY -> getString(R.string.no_tasks_today)
+                                TaskFilter.UPCOMING -> getString(R.string.no_upcoming_tasks)
+                            }
                         }
                     } else {
                         binding.rvTasks.visibility = View.VISIBLE
