@@ -96,7 +96,10 @@ class SplashActivity : AppCompatActivity() {
             }
 
             delay(1000) // 1 second delay
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            val intent = Intent(this@SplashActivity, MainActivity::class.java).apply {
+                putExtra("EXTRA_THEME_MODE", themeMode.name)
+            }
+            startActivity(intent)
             // Apply smooth fade transition
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()

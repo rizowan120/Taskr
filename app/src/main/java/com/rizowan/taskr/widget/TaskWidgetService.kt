@@ -29,7 +29,7 @@ class TaskWidgetFactory(private val context: Context) : RemoteViewsService.Remot
             context,
             TaskrDatabase::class.java,
             "taskr_database"
-        ).build()
+        ).addMigrations(TaskrDatabase.MIGRATION_1_2).build()
     }
 
     override fun onDataSetChanged() {
