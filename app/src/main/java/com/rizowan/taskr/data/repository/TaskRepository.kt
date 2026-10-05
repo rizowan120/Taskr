@@ -58,6 +58,14 @@ class TaskRepository @Inject constructor(
     }
 
     /**
+     * Update only the task without touching its subtasks.
+     * Useful for updating sort order or simple task properties.
+     */
+    suspend fun updateTaskOnly(task: Task) {
+        taskDao.updateTask(task)
+    }
+
+    /**
      * Delete a task (subtasks are deleted automatically via CASCADE).
      */
     suspend fun deleteTask(task: Task) {

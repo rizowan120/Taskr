@@ -186,7 +186,7 @@ class TasksViewModel @Inject constructor(
     fun updateTaskSortOrder(tasksToUpdate: List<Task>) {
         viewModelScope.launch {
             tasksToUpdate.forEach { task ->
-                taskRepository.updateTask(task)
+                taskRepository.updateTaskOnly(task)
             }
         }
     }
